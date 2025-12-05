@@ -1,11 +1,24 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Image, View } from 'react-native';
+
+import HomeHeader from './HomeHeader/HomeHeader';
+import HomeMenu from './HomeMenu/HomeMenu';
+import { styles } from './styles';
+
+import { CustomScreenWrapper } from 'src/components';
+import { LOGO } from 'src/constants';
 
 const HomeScreen = () => {
   return (
-    <View>
-      <Text>HomeScreen</Text>
-    </View>
+    <CustomScreenWrapper extraStyle={styles.container}>
+      <HomeHeader />
+
+      <View style={styles.logoWrapper}>
+        <Image source={LOGO} style={styles.logo} resizeMode="contain" />
+      </View>
+
+      <HomeMenu />
+    </CustomScreenWrapper>
   );
 };
 

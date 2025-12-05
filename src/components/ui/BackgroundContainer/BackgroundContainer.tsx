@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import React from 'react';
 import type { StyleProp, ViewStyle } from 'react-native';
-import { ImageBackground } from 'react-native';
+import { ImageBackground, View } from 'react-native';
 
 import { styles } from './styles';
 
@@ -24,7 +24,7 @@ const BackgroundContainer = ({
       resizeMode="cover"
       style={[styles.container, extraStyle]}
     >
-      {children}
+      <View style={styles.overlay}>{children}</View>
     </ImageBackground>
   );
 };

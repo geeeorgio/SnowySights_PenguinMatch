@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import React from 'react';
 import type { Insets, StyleProp, ViewStyle } from 'react-native';
-import { Pressable } from 'react-native';
+import { Pressable, View } from 'react-native';
 
 import CustomContainer from '../CustomContainer/CustomContainer';
 import CustomIcon from '../CustomIcon/CustomIcon';
@@ -37,7 +37,9 @@ const CustomButton = ({
     variant === 'main' ? (
       <CustomContainer extraStyle={containerStyle}>{children}</CustomContainer>
     ) : (
-      <CustomIcon iconName={iconName as keyof typeof ICONS} />
+      <View style={containerStyle}>
+        <CustomIcon iconName={iconName as keyof typeof ICONS} />
+      </View>
     );
 
   return (

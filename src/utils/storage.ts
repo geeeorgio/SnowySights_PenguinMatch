@@ -19,3 +19,79 @@ export const getBackgroundFromStorage = async () => {
     return null;
   }
 };
+
+export const setOnboardingCompleted = async (completed: boolean) => {
+  try {
+    const jsonValue = JSON.stringify(completed);
+    await AsyncStorage.setItem('onboarding_completed', jsonValue);
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const getOnboardingCompleted = async () => {
+  try {
+    const value = await AsyncStorage.getItem('onboarding_completed');
+    return value !== null ? JSON.parse(value) : false;
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+};
+
+export const getScore = async () => {
+  try {
+    const value = await AsyncStorage.getItem('score');
+    return value !== null ? JSON.parse(value) : 0;
+  } catch (e) {
+    console.error(e);
+    return 0;
+  }
+};
+
+export const setScore = async (finalScore: number) => {
+  try {
+    const jsonValue = JSON.stringify(finalScore);
+    await AsyncStorage.setItem('score', jsonValue);
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const setMusicEnabled = async (enabled: boolean) => {
+  try {
+    const jsonValue = JSON.stringify(enabled);
+    await AsyncStorage.setItem('music', jsonValue);
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const getMusicEnabled = async () => {
+  try {
+    const value = await AsyncStorage.getItem('music');
+    return value !== null ? JSON.parse(value) : true;
+  } catch (e) {
+    console.error(e);
+    return true;
+  }
+};
+
+export const setSoundEnabled = async (enabled: boolean) => {
+  try {
+    const jsonValue = JSON.stringify(enabled);
+    await AsyncStorage.setItem('sound', jsonValue);
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const getSoundEnabled = async () => {
+  try {
+    const value = await AsyncStorage.getItem('sound');
+    return value !== null ? JSON.parse(value) : true;
+  } catch (e) {
+    console.error(e);
+    return true;
+  }
+};

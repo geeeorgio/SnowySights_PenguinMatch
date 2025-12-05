@@ -1,4 +1,10 @@
-export const STORIES = [
+export interface Story {
+  id: string;
+  title: string;
+  description: string;
+}
+
+export const STORIES: Story[] = [
   {
     id: 'silent-march',
     title: 'The Silent March of the Emperors',
