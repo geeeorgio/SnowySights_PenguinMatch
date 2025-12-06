@@ -6,6 +6,7 @@ export type GameLevel = {
   id: string;
   level: number;
   numberOfItems: number;
+  isLocked: boolean;
 };
 
 export type GameRune = {
@@ -19,14 +20,14 @@ export type LevelItem = GameRune & {
 };
 
 export const GAME_LEVELS = [
-  { id: 'lvl1', level: 1, numberOfItems: 3 },
-  { id: 'lvl2', level: 2, numberOfItems: 4 },
-  { id: 'lvl3', level: 3, numberOfItems: 5 },
-  { id: 'lvl4', level: 4, numberOfItems: 6 },
-  { id: 'lvl5', level: 5, numberOfItems: 7 },
-  { id: 'lvl6', level: 6, numberOfItems: 8 },
-  { id: 'lvl7', level: 7, numberOfItems: 8 },
-  { id: 'lvl8', level: 8, numberOfItems: 8 },
+  { id: 'lvl1', level: 1, numberOfItems: 3, isLocked: false },
+  { id: 'lvl2', level: 2, numberOfItems: 4, isLocked: true },
+  { id: 'lvl3', level: 3, numberOfItems: 5, isLocked: true },
+  { id: 'lvl4', level: 4, numberOfItems: 6, isLocked: true },
+  { id: 'lvl5', level: 5, numberOfItems: 7, isLocked: true },
+  { id: 'lvl6', level: 6, numberOfItems: 8, isLocked: true },
+  { id: 'lvl7', level: 7, numberOfItems: 8, isLocked: true },
+  { id: 'lvl8', level: 8, numberOfItems: 8, isLocked: true },
 ];
 
 export const GAME_RUNES: GameRune[] = [

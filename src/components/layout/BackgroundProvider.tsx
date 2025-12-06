@@ -2,16 +2,18 @@ import type { ReactNode } from 'react';
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import type { ImageSourcePropType } from 'react-native';
 
-import type { ShopBackground } from 'src/constants';
-import { MAIN_BACKGROUND, SHOP_BACKGROUNDS } from 'src/constants';
+import type { GameLevel, ShopBackground } from 'src/constants';
+import { GAME_LEVELS, MAIN_BACKGROUND, SHOP_BACKGROUNDS } from 'src/constants';
 import {
   getBackgroundFromStorage,
+  getLevelsFromStore,
   getMusicEnabledFromStore,
   getOnboardingFromStore,
   getScoreFromStore,
   getShopActualBackgroundsFromStore,
   getSoundEnabledFromStore,
   saveBackgroundToStorage,
+  setLevelsToStore,
   setMusicEnabledToStore,
   setOnboardingToStore,
   setScoreToStore,
@@ -41,6 +43,9 @@ const BgContext = createContext<{
   setContextShopBackgrounds: (
     newBackgrounds: ShopBackground[],
   ) => Promise<void>;
+  //
+  contextLevels: GameLevel[];
+  setContextLevels: (levels: GameLevel[]) => Promise<void>;
 }>({
   contextBg: MAIN_BACKGROUND,
   changeContextBg: async () => {
@@ -70,6 +75,10 @@ const BgContext = createContext<{
   setContextShopBackgrounds: async () => {
     console.warn('BackgroundProvider not mounted');
   },
+  contextLevels: GAME_LEVELS,
+  setContextLevels: async (levels: GameLevel[]) => {
+    console.warn('BackgroundProvider not mounted');
+  },
 });
 
 const BackgroundProvider = ({ children }: { children: ReactNode }) => {
@@ -82,6 +91,7 @@ const BackgroundProvider = ({ children }: { children: ReactNode }) => {
   const [savedSoundEnabled, setSavedSoundEnabled] = useState<boolean>(true);
   const [savedShopBackgrounds, setSavedShopBackgrounds] =
     useState<ShopBackground[]>(SHOP_BACKGROUNDS);
+  const [savedLevels, setSavedLevels] = useState<GameLevel[]>(GAME_LEVELS);
 
   useEffect(() => {
     const initializeData = async () => {
@@ -93,6 +103,7 @@ const BackgroundProvider = ({ children }: { children: ReactNode }) => {
           musicEnabled,
           soundEnabled,
           shopBackgrounds,
+          currentLevels,
         ] = await Promise.all([
           getBackgroundFromStorage(),
           getOnboardingFromStore(),
@@ -100,20 +111,24 @@ const BackgroundProvider = ({ children }: { children: ReactNode }) => {
           getMusicEnabledFromStore(),
           getSoundEnabledFromStore(),
           getShopActualBackgroundsFromStore(),
+          getLevelsFromStore(),
         ]);
 
         if (savedBackground) {
           setBg(savedBackground);
         }
+
         setIsOnboardingCompleted(isCompleted);
 
         setSavedScore(currentScore);
+        setSavedLevels(currentLevels);
         setSavedMusicEnabled(musicEnabled);
         setSavedSoundEnabled(soundEnabled);
         setSavedShopBackgrounds(shopBackgrounds);
       } catch (e) {
         console.error('Error initializing data from storage:', e);
 
+        setSavedLevels(GAME_LEVELS);
         setIsOnboardingCompleted(false);
         setSavedScore(0);
         setSavedMusicEnabled(true);
@@ -193,6 +208,15 @@ const BackgroundProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const setContextLevels = async (levels: GameLevel[]) => {
+    try {
+      setSavedLevels(levels);
+      await setLevelsToStore(levels);
+    } catch (e) {
+      console.error('Error setting level:', e);
+    }
+  };
+
   return (
     <BgContext.Provider
       value={{
@@ -210,6 +234,8 @@ const BackgroundProvider = ({ children }: { children: ReactNode }) => {
         enableContextSound,
         contextShopBackgrounds: savedShopBackgrounds,
         setContextShopBackgrounds,
+        contextLevels: savedLevels,
+        setContextLevels,
       }}
     >
       {children}

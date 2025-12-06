@@ -1,8 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { ImageSourcePropType } from 'react-native';
 
-import type { ShopBackground } from 'src/constants';
-import { SHOP_BACKGROUNDS } from 'src/constants';
+import type { GameLevel, ShopBackground } from 'src/constants';
+import { GAME_LEVELS, SHOP_BACKGROUNDS } from 'src/constants';
 
 export const saveBackgroundToStorage = async (source: ImageSourcePropType) => {
   try {
@@ -115,6 +115,25 @@ export const setShopBackgroundsToStore = async (
   try {
     const jsonValue = JSON.stringify(backgrounds);
     await AsyncStorage.setItem('shop_backgrounds', jsonValue);
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const getLevelsFromStore = async () => {
+  try {
+    const value = await AsyncStorage.getItem('levels');
+    return value !== null ? JSON.parse(value) : GAME_LEVELS;
+  } catch (e) {
+    console.error(e);
+    return GAME_LEVELS;
+  }
+};
+
+export const setLevelsToStore = async (levels: GameLevel[]) => {
+  try {
+    const jsonValue = JSON.stringify(levels);
+    await AsyncStorage.setItem('level', jsonValue);
   } catch (e) {
     console.error(e);
   }
