@@ -1,6 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { ImageSourcePropType } from 'react-native';
 
+import type { ShopBackground } from 'src/constants';
+import { SHOP_BACKGROUNDS } from 'src/constants';
+
 export const saveBackgroundToStorage = async (source: ImageSourcePropType) => {
   try {
     const jsonValue = JSON.stringify(source);
@@ -20,7 +23,7 @@ export const getBackgroundFromStorage = async () => {
   }
 };
 
-export const setOnboardingCompleted = async (completed: boolean) => {
+export const setOnboardingToStore = async (completed: boolean) => {
   try {
     const jsonValue = JSON.stringify(completed);
     await AsyncStorage.setItem('onboarding_completed', jsonValue);
@@ -29,7 +32,7 @@ export const setOnboardingCompleted = async (completed: boolean) => {
   }
 };
 
-export const getOnboardingCompleted = async () => {
+export const getOnboardingFromStore = async () => {
   try {
     const value = await AsyncStorage.getItem('onboarding_completed');
     return value !== null ? JSON.parse(value) : false;
@@ -39,7 +42,7 @@ export const getOnboardingCompleted = async () => {
   }
 };
 
-export const getScore = async () => {
+export const getScoreFromStore = async () => {
   try {
     const value = await AsyncStorage.getItem('score');
     return value !== null ? JSON.parse(value) : 0;
@@ -49,7 +52,7 @@ export const getScore = async () => {
   }
 };
 
-export const setScore = async (finalScore: number) => {
+export const setScoreToStore = async (finalScore: number) => {
   try {
     const jsonValue = JSON.stringify(finalScore);
     await AsyncStorage.setItem('score', jsonValue);
@@ -58,7 +61,7 @@ export const setScore = async (finalScore: number) => {
   }
 };
 
-export const setMusicEnabled = async (enabled: boolean) => {
+export const setMusicEnabledToStore = async (enabled: boolean) => {
   try {
     const jsonValue = JSON.stringify(enabled);
     await AsyncStorage.setItem('music', jsonValue);
@@ -67,7 +70,7 @@ export const setMusicEnabled = async (enabled: boolean) => {
   }
 };
 
-export const getMusicEnabled = async () => {
+export const getMusicEnabledFromStore = async () => {
   try {
     const value = await AsyncStorage.getItem('music');
     return value !== null ? JSON.parse(value) : true;
@@ -77,7 +80,7 @@ export const getMusicEnabled = async () => {
   }
 };
 
-export const setSoundEnabled = async (enabled: boolean) => {
+export const setSoundEnabledToStore = async (enabled: boolean) => {
   try {
     const jsonValue = JSON.stringify(enabled);
     await AsyncStorage.setItem('sound', jsonValue);
@@ -86,12 +89,33 @@ export const setSoundEnabled = async (enabled: boolean) => {
   }
 };
 
-export const getSoundEnabled = async () => {
+export const getSoundEnabledFromStore = async () => {
   try {
     const value = await AsyncStorage.getItem('sound');
     return value !== null ? JSON.parse(value) : true;
   } catch (e) {
     console.error(e);
     return true;
+  }
+};
+
+export const getShopActualBackgroundsFromStore = async () => {
+  try {
+    const value = await AsyncStorage.getItem('shop_backgrounds');
+    return value !== null ? JSON.parse(value) : SHOP_BACKGROUNDS;
+  } catch (e) {
+    console.error(e);
+    return SHOP_BACKGROUNDS;
+  }
+};
+
+export const setShopBackgroundsToStore = async (
+  backgrounds: ShopBackground[],
+) => {
+  try {
+    const jsonValue = JSON.stringify(backgrounds);
+    await AsyncStorage.setItem('shop_backgrounds', jsonValue);
+  } catch (e) {
+    console.error(e);
   }
 };

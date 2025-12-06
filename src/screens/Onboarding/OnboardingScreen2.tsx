@@ -10,7 +10,7 @@ import { ONBD_BCKD } from 'src/constants';
 import type { OnboardingStackParamListNavigationProps } from 'src/types';
 
 const OnboardingScreen2 = () => {
-  const { completeOnboarding } = useGameBackground();
+  const { completeContextOnboarding } = useGameBackground();
   const navigation = useNavigation<OnboardingStackParamListNavigationProps>();
 
   const handleNext = () => {
@@ -18,7 +18,7 @@ const OnboardingScreen2 = () => {
   };
 
   const handleSkip = async () => {
-    await completeOnboarding();
+    await completeContextOnboarding();
   };
 
   return (

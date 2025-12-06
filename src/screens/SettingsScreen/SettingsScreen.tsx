@@ -13,8 +13,12 @@ import { useGameBackground } from 'src/components/layout/BackgroundProvider';
 import { COLORS } from 'src/constants';
 
 const SettingsScreen = () => {
-  const { musicEnabled, soundEnabled, enableContextMusic, enableContextSound } =
-    useGameBackground();
+  const {
+    contextMusicEnabled,
+    contextSoundEnabled,
+    enableContextMusic,
+    enableContextSound,
+  } = useGameBackground();
 
   const handleTermsOfUse = () => {
     console.log('terms of use to be added soon');
@@ -30,7 +34,7 @@ const SettingsScreen = () => {
             <CustomText extraStyle={styles.optionText}>Music</CustomText>
             <Switch
               style={styles.optionSwitch}
-              value={musicEnabled}
+              value={contextMusicEnabled}
               onValueChange={enableContextMusic}
               trackColor={{
                 true: COLORS.switchActive,
@@ -43,7 +47,7 @@ const SettingsScreen = () => {
             <CustomText extraStyle={styles.optionText}>Sound</CustomText>
             <Switch
               style={styles.optionSwitch}
-              value={soundEnabled}
+              value={contextSoundEnabled}
               onValueChange={enableContextSound}
               trackColor={{
                 true: COLORS.switchActive,

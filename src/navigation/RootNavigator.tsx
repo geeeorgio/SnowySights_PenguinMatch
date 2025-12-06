@@ -10,7 +10,8 @@ import type { RootStackParamList } from 'src/types';
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
-  const { isOnboardingCompleted, isLoading } = useGameBackground();
+  const { contextIsOnboardingCompleted, isContextLoading } =
+    useGameBackground();
 
   return (
     <Layout>
@@ -23,7 +24,7 @@ const RootNavigator = () => {
           animation: 'fade',
         }}
       >
-        {isOnboardingCompleted && !isLoading ? (
+        {contextIsOnboardingCompleted && !isContextLoading ? (
           <RootStack.Screen name="MainStack" component={MainNavigator} />
         ) : (
           <RootStack.Screen

@@ -1,11 +1,27 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Text, View } from 'react-native';
+
+import { styles } from './styles';
+
+import { CustomHeader, CustomScreenWrapper } from 'src/components';
+import type { MainStackParamListNavigationProps } from 'src/types';
 
 const LevelsScreen = () => {
+  const navigation = useNavigation<MainStackParamListNavigationProps>();
+
+  const handleAbout = () => {
+    navigation.navigate('AboutScreen');
+  };
+
   return (
-    <View>
-      <Text>LevelsScreen</Text>
-    </View>
+    <CustomScreenWrapper extraStyle={styles.container}>
+      <CustomHeader
+        title="LEVELS"
+        showRightButton={true}
+        handleRightButton={handleAbout}
+        rightButtonName="about"
+      />
+    </CustomScreenWrapper>
   );
 };
 

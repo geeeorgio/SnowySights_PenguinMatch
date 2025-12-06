@@ -12,13 +12,25 @@ import {
   SceneContainer,
 } from 'src/components';
 import { useGameBackground } from 'src/components/layout/BackgroundProvider';
-import { GAME_ITEMS, ICONS, OPTIONAL_BACKGROUNDS } from 'src/constants';
+import type { ShopBackground } from 'src/constants';
+import { GAME_ITEMS, ICONS } from 'src/constants';
 import type { MainStackParamListNavigationProps } from 'src/types';
 
 const ShopScreen = () => {
-  const { score, decrementContextScore } = useGameBackground();
+  const {
+    contextScore,
+    decrementContextScore,
+    contextShopBackgrounds,
+    setContextShopBackgrounds,
+    contextBg,
+    changeContextBg,
+  } = useGameBackground();
   const navigation = useNavigation<MainStackParamListNavigationProps>();
 
+  const [currentBackgroundIndex, setCurrentBackgroundIndex] = useState(0);
+  const [currentBackground, setCurrentBackground] = useState<ShopBackground>(
+    contextShopBackgrounds[currentBackgroundIndex],
+  );
   const [shouldShowAlert, setShouldShowAlert] = useState(false);
 
   const handleBack = () => {
@@ -26,7 +38,7 @@ const ShopScreen = () => {
   };
 
   const handleBuy = async () => {
-    if (score < 15) {
+    if (contextScore < currentBackground.price) {
       setShouldShowAlert(true);
 
       setTimeout(() => {
@@ -35,12 +47,39 @@ const ShopScreen = () => {
       return;
     }
 
-    await decrementContextScore(15);
+    const newBackgrounds = [
+      ...contextShopBackgrounds,
+      { ...currentBackground, isLocked: false },
+    ];
+
+    await setContextShopBackgrounds(newBackgrounds);
+
+    await decrementContextScore(currentBackground.price);
   };
 
   const handleSwitchScene = () => {
-    console.log('switch scene');
+    if (currentBackgroundIndex === contextShopBackgrounds.length - 1) {
+      setCurrentBackgroundIndex(0);
+      setCurrentBackground(contextShopBackgrounds[0]);
+    } else {
+      setCurrentBackgroundIndex(currentBackgroundIndex + 1);
+      setCurrentBackground(contextShopBackgrounds[currentBackgroundIndex + 1]);
+    }
   };
+
+  const handleChangeBackground = () => {
+    if (currentBackground.source === contextBg) {
+      return;
+    }
+
+    changeContextBg(currentBackground.source);
+  };
+
+  const buttonText = currentBackground.isLocked
+    ? 'Unlock'
+    : currentBackground.source === contextBg
+      ? 'Current theme'
+      : 'Set';
 
   return (
     <CustomScreenWrapper extraStyle={styles.container}>
@@ -59,33 +98,39 @@ const ShopScreen = () => {
             style={styles.scoreIcon}
             resizeMode="contain"
           />
-          <CustomText extraStyle={styles.scoreText}>{score}</CustomText>
+          <CustomText extraStyle={styles.scoreText}>{contextScore}</CustomText>
         </View>
       </View>
 
       <SceneContainer extraStyle={styles.sceneWrapper}>
         <View style={styles.sceneContent}>
           <ImageBackground
-            source={OPTIONAL_BACKGROUNDS.bg1}
+            source={currentBackground.source}
             style={styles.sceneImage}
             resizeMode="cover"
           >
-            <View style={styles.sceneLockWrapper}>
-              <Image
-                source={ICONS.lock}
-                style={styles.lockIcon}
-                resizeMode="contain"
-              />
-            </View>
-            <View style={styles.scenePriceWrapper}>
-              <Image
-                source={GAME_ITEMS.coin}
-                style={styles.coinIcon}
-                resizeMode="contain"
-              />
-              <CustomText extraStyle={styles.sceneText}>15</CustomText>
-            </View>
-            <View style={styles.sceneOverlay} />
+            {currentBackground.isLocked && (
+              <>
+                <View style={styles.sceneLockWrapper}>
+                  <Image
+                    source={ICONS.lock}
+                    style={styles.lockIcon}
+                    resizeMode="contain"
+                  />
+                </View>
+                <View style={styles.scenePriceWrapper}>
+                  <Image
+                    source={GAME_ITEMS.coin}
+                    style={styles.coinIcon}
+                    resizeMode="contain"
+                  />
+                  <CustomText extraStyle={styles.sceneText}>
+                    {currentBackground.price}
+                  </CustomText>
+                </View>
+                <View style={styles.sceneOverlay} />
+              </>
+            )}
           </ImageBackground>
         </View>
       </SceneContainer>
@@ -99,12 +144,15 @@ const ShopScreen = () => {
           containerStyle={styles.buttonContainer}
         />
         <CustomButton
-          handlePress={handleBuy}
+          handlePress={
+            currentBackground.isLocked ? handleBuy : handleChangeBackground
+          }
           variant="main"
           buttonStyle={styles.buyButton}
           containerStyle={styles.buttonContainer}
+          isDisabled={currentBackground.source === contextBg}
         >
-          <CustomText extraStyle={styles.buttonText}>Unlock</CustomText>
+          <CustomText extraStyle={styles.buttonText}>{buttonText}</CustomText>
         </CustomButton>
         <CustomButton
           handlePress={handleSwitchScene}

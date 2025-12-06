@@ -8,10 +8,10 @@ import { useGameBackground } from 'src/components/layout/BackgroundProvider';
 import { GAME_ITEMS } from 'src/constants';
 
 const OnboardingScreen3 = () => {
-  const { completeOnboarding } = useGameBackground();
+  const { completeContextOnboarding } = useGameBackground();
 
   const handleNext = async () => {
-    await completeOnboarding();
+    await completeContextOnboarding();
   };
 
   return (

@@ -2,60 +2,72 @@ import type { ReactNode } from 'react';
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import type { ImageSourcePropType } from 'react-native';
 
-import { MAIN_BACKGROUND } from 'src/constants';
+import type { ShopBackground } from 'src/constants';
+import { MAIN_BACKGROUND, SHOP_BACKGROUNDS } from 'src/constants';
 import {
   getBackgroundFromStorage,
-  getMusicEnabled,
-  getOnboardingCompleted,
-  getScore,
-  getSoundEnabled,
+  getMusicEnabledFromStore,
+  getOnboardingFromStore,
+  getScoreFromStore,
+  getShopActualBackgroundsFromStore,
+  getSoundEnabledFromStore,
   saveBackgroundToStorage,
-  setMusicEnabled,
-  setOnboardingCompleted,
-  setScore,
-  setSoundEnabled,
+  setMusicEnabledToStore,
+  setOnboardingToStore,
+  setScoreToStore,
+  setShopBackgroundsToStore,
+  setSoundEnabledToStore,
 } from 'src/utils';
 
 const BgContext = createContext<{
   //
-  bg: ImageSourcePropType;
-  changeBg: (newBg: ImageSourcePropType) => Promise<void>;
+  contextBg: ImageSourcePropType;
+  changeContextBg: (newBg: ImageSourcePropType) => Promise<void>;
   //
-  isOnboardingCompleted: boolean;
-  isLoading: boolean;
-  completeOnboarding: () => Promise<void>;
+  contextIsOnboardingCompleted: boolean;
+  isContextLoading: boolean;
+  completeContextOnboarding: () => Promise<void>;
   //
-  score: number;
+  contextScore: number;
   setContextScore: (newScore: number) => Promise<void>;
   decrementContextScore: (score: number) => Promise<void>;
   //
-  musicEnabled: boolean;
+  contextMusicEnabled: boolean;
   enableContextMusic: (enabled: boolean) => Promise<void>;
-  soundEnabled: boolean;
+  contextSoundEnabled: boolean;
   enableContextSound: (enabled: boolean) => Promise<void>;
+  //
+  contextShopBackgrounds: ShopBackground[];
+  setContextShopBackgrounds: (
+    newBackgrounds: ShopBackground[],
+  ) => Promise<void>;
 }>({
-  bg: MAIN_BACKGROUND,
-  changeBg: async () => {
+  contextBg: MAIN_BACKGROUND,
+  changeContextBg: async () => {
     console.warn('BackgroundProvider not mounted');
   },
-  isOnboardingCompleted: false,
-  isLoading: true,
-  completeOnboarding: async () => {
+  contextIsOnboardingCompleted: false,
+  isContextLoading: true,
+  completeContextOnboarding: async () => {
     console.warn('BackgroundProvider not mounted');
   },
-  score: 0,
+  contextScore: 0,
   setContextScore: async () => {
     console.warn('BackgroundProvider not mounted');
   },
   decrementContextScore: async () => {
     console.warn('BackgroundProvider not mounted');
   },
-  musicEnabled: true,
+  contextMusicEnabled: true,
   enableContextMusic: async () => {
     console.warn('BackgroundProvider not mounted');
   },
-  soundEnabled: true,
+  contextSoundEnabled: true,
   enableContextSound: async () => {
+    console.warn('BackgroundProvider not mounted');
+  },
+  contextShopBackgrounds: [],
+  setContextShopBackgrounds: async () => {
     console.warn('BackgroundProvider not mounted');
   },
 });
@@ -66,8 +78,10 @@ const BackgroundProvider = ({ children }: { children: ReactNode }) => {
     useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [savedScore, setSavedScore] = useState<number>(0);
-  const [musicContextEnabled, setMusicContextEnabled] = useState<boolean>(true);
-  const [soundContextEnabled, setSoundContextEnabled] = useState<boolean>(true);
+  const [savedMusicEnabled, setSavedMusicEnabled] = useState<boolean>(true);
+  const [savedSoundEnabled, setSavedSoundEnabled] = useState<boolean>(true);
+  const [savedShopBackgrounds, setSavedShopBackgrounds] =
+    useState<ShopBackground[]>(SHOP_BACKGROUNDS);
 
   useEffect(() => {
     const initializeData = async () => {
@@ -78,12 +92,14 @@ const BackgroundProvider = ({ children }: { children: ReactNode }) => {
           currentScore,
           musicEnabled,
           soundEnabled,
+          shopBackgrounds,
         ] = await Promise.all([
           getBackgroundFromStorage(),
-          getOnboardingCompleted(),
-          getScore(),
-          getMusicEnabled(),
-          getSoundEnabled(),
+          getOnboardingFromStore(),
+          getScoreFromStore(),
+          getMusicEnabledFromStore(),
+          getSoundEnabledFromStore(),
+          getShopActualBackgroundsFromStore(),
         ]);
 
         if (savedBackground) {
@@ -92,15 +108,17 @@ const BackgroundProvider = ({ children }: { children: ReactNode }) => {
         setIsOnboardingCompleted(isCompleted);
 
         setSavedScore(currentScore);
-        setMusicContextEnabled(musicEnabled);
-        setSoundContextEnabled(soundEnabled);
+        setSavedMusicEnabled(musicEnabled);
+        setSavedSoundEnabled(soundEnabled);
+        setSavedShopBackgrounds(shopBackgrounds);
       } catch (e) {
         console.error('Error initializing data from storage:', e);
 
         setIsOnboardingCompleted(false);
         setSavedScore(0);
-        setMusicContextEnabled(true);
-        setSoundContextEnabled(true);
+        setSavedMusicEnabled(true);
+        setSavedSoundEnabled(true);
+        setSavedShopBackgrounds(SHOP_BACKGROUNDS);
       } finally {
         setIsLoading(false);
       }
@@ -109,14 +127,14 @@ const BackgroundProvider = ({ children }: { children: ReactNode }) => {
     initializeData();
   }, []);
 
-  const changeBg = async (newBg: ImageSourcePropType) => {
+  const changeContextBg = async (newBg: ImageSourcePropType) => {
     setBg(newBg);
     await saveBackgroundToStorage(newBg);
   };
 
-  const completeOnboarding = async () => {
+  const completeContextOnboarding = async () => {
     try {
-      await setOnboardingCompleted(true);
+      await setOnboardingToStore(true);
       setIsOnboardingCompleted(true);
     } catch (e) {
       console.error('Error completing onboarding:', e);
@@ -128,7 +146,7 @@ const BackgroundProvider = ({ children }: { children: ReactNode }) => {
       const newScore = Math.max(0, savedScore - decrement);
 
       setSavedScore(newScore);
-      await setScore(newScore);
+      await setScoreToStore(newScore);
     } catch (e) {
       console.error('Error decrementing score:', e);
     }
@@ -140,7 +158,7 @@ const BackgroundProvider = ({ children }: { children: ReactNode }) => {
       const finalScore = Math.max(0, newSavedScore);
 
       setSavedScore(finalScore);
-      await setScore(finalScore);
+      await setScoreToStore(finalScore);
     } catch (e) {
       console.error('Error setting score:', e);
     }
@@ -148,8 +166,8 @@ const BackgroundProvider = ({ children }: { children: ReactNode }) => {
 
   const enableContextMusic = async (enabled: boolean) => {
     try {
-      setMusicContextEnabled(enabled);
-      await setMusicEnabled(enabled);
+      setSavedMusicEnabled(enabled);
+      await setMusicEnabledToStore(enabled);
     } catch (e) {
       console.error('Error enabling music:', e);
     }
@@ -157,28 +175,41 @@ const BackgroundProvider = ({ children }: { children: ReactNode }) => {
 
   const enableContextSound = async (enabled: boolean) => {
     try {
-      setSoundContextEnabled(enabled);
-      await setSoundEnabled(enabled);
+      setSavedSoundEnabled(enabled);
+      await setSoundEnabledToStore(enabled);
     } catch (e) {
       console.error('Error enabling sound:', e);
+    }
+  };
+
+  const setContextShopBackgrounds = async (
+    newBackgrounds: ShopBackground[],
+  ) => {
+    try {
+      setSavedShopBackgrounds(newBackgrounds);
+      await setShopBackgroundsToStore(newBackgrounds);
+    } catch (e) {
+      console.error('Error setting shop backgrounds:', e);
     }
   };
 
   return (
     <BgContext.Provider
       value={{
-        bg,
-        changeBg,
-        isOnboardingCompleted,
-        isLoading,
-        completeOnboarding,
-        score: savedScore,
+        contextBg: bg,
+        changeContextBg,
+        contextIsOnboardingCompleted: isOnboardingCompleted,
+        isContextLoading: isLoading,
+        completeContextOnboarding,
+        contextScore: savedScore,
         setContextScore,
         decrementContextScore,
-        musicEnabled: musicContextEnabled,
+        contextMusicEnabled: savedMusicEnabled,
         enableContextMusic,
-        soundEnabled: soundContextEnabled,
+        contextSoundEnabled: savedSoundEnabled,
         enableContextSound,
+        contextShopBackgrounds: savedShopBackgrounds,
+        setContextShopBackgrounds,
       }}
     >
       {children}

@@ -8,14 +8,24 @@ import CustomText from '../CustomText/CustomText';
 
 import { styles } from './styles';
 
+import type { ICONS } from 'src/constants';
 import type { MainStackParamListNavigationProps } from 'src/types';
 
 interface CustomHeaderProps {
   title?: string;
+  showRightButton?: boolean;
+  handleRightButton?: () => void;
+  rightButtonName?: keyof typeof ICONS;
   props?: NativeStackHeaderProps;
 }
 
-const CustomHeader = ({ title, props }: CustomHeaderProps) => {
+const CustomHeader = ({
+  title,
+  showRightButton,
+  handleRightButton,
+  rightButtonName,
+  props,
+}: CustomHeaderProps) => {
   const navigation = useNavigation<MainStackParamListNavigationProps>();
   const options = props?.options;
 
@@ -42,7 +52,17 @@ const CustomHeader = ({ title, props }: CustomHeaderProps) => {
           </View>
         )}
 
-        <View style={styles.filler} />
+        {showRightButton ? (
+          <CustomButton
+            handlePress={handleRightButton || (() => {})}
+            variant="icon"
+            iconName={rightButtonName}
+            buttonStyle={styles.button}
+            containerStyle={styles.buttonContainer}
+          />
+        ) : (
+          <View style={styles.filler} />
+        )}
       </View>
     </View>
   );

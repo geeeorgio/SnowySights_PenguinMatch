@@ -5,10 +5,12 @@ import { Image, View } from 'react-native';
 import { styles } from './styles';
 
 import { CustomButton, CustomText } from 'src/components';
+import { useGameBackground } from 'src/components/layout/BackgroundProvider';
 import { GAME_ITEMS } from 'src/constants';
 import type { MainStackParamListNavigationProps } from 'src/types';
 
 const HomeHeader = () => {
+  const { contextScore } = useGameBackground();
   const navigation = useNavigation<MainStackParamListNavigationProps>();
 
   const handleAbout = () => {
@@ -35,7 +37,7 @@ const HomeHeader = () => {
           style={styles.scoreIcon}
           resizeMode="contain"
         />
-        <CustomText extraStyle={styles.scoreText}>0</CustomText>
+        <CustomText extraStyle={styles.scoreText}>{contextScore}</CustomText>
       </View>
       <CustomButton
         handlePress={handleSettings}

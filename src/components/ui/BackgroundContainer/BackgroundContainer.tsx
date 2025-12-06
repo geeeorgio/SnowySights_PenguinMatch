@@ -16,11 +16,11 @@ const BackgroundContainer = ({
   children,
   extraStyle,
 }: BackgroundContainerProps) => {
-  const { bg } = useGameBackground();
+  const { contextBg } = useGameBackground();
 
   return (
     <ImageBackground
-      source={bg}
+      source={contextBg}
       resizeMode="cover"
       style={[styles.container, extraStyle]}
     >
