@@ -133,7 +133,7 @@ export const getLevelsFromStore = async () => {
 export const setLevelsToStore = async (levels: GameLevel[]) => {
   try {
     const jsonValue = JSON.stringify(levels);
-    await AsyncStorage.setItem('level', jsonValue);
+    await AsyncStorage.setItem('levels', jsonValue);
   } catch (e) {
     console.error(e);
   }

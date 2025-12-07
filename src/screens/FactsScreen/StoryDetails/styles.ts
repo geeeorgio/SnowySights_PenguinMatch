@@ -40,7 +40,7 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
   selectedStoryTitle: {
-    fontSize: sp(20),
+    fontSize: sp(18),
     color: COLORS.blue,
   },
   selectedStoryDescription: {

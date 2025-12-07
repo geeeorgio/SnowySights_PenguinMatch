@@ -46,6 +46,7 @@ const BgContext = createContext<{
   //
   contextLevels: GameLevel[];
   setContextLevels: (levels: GameLevel[]) => Promise<void>;
+  completeLevel: (levelId: string) => Promise<void>;
 }>({
   contextBg: MAIN_BACKGROUND,
   changeContextBg: async () => {
@@ -76,7 +77,10 @@ const BgContext = createContext<{
     console.warn('BackgroundProvider not mounted');
   },
   contextLevels: GAME_LEVELS,
-  setContextLevels: async (levels: GameLevel[]) => {
+  setContextLevels: async (_levels: GameLevel[]) => {
+    console.warn('BackgroundProvider not mounted');
+  },
+  completeLevel: async () => {
     console.warn('BackgroundProvider not mounted');
   },
 });
@@ -217,6 +221,32 @@ const BackgroundProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const completeLevel = async (levelId: string) => {
+    try {
+      const currentLevelIndex = savedLevels.findIndex((l) => l.id === levelId);
+
+      if (currentLevelIndex === -1) {
+        return;
+      }
+
+      const updatedLevels = savedLevels.map((level, index) => {
+        if (
+          index === currentLevelIndex + 1 &&
+          index < savedLevels.length &&
+          level.isLocked
+        ) {
+          return { ...level, isLocked: false };
+        }
+        return level;
+      });
+
+      setSavedLevels(updatedLevels);
+      await setLevelsToStore(updatedLevels);
+    } catch (e) {
+      console.error('Error completing level:', e);
+    }
+  };
+
   return (
     <BgContext.Provider
       value={{
@@ -236,6 +266,7 @@ const BackgroundProvider = ({ children }: { children: ReactNode }) => {
         setContextShopBackgrounds,
         contextLevels: savedLevels,
         setContextLevels,
+        completeLevel,
       }}
     >
       {children}

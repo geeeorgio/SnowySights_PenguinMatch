@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     width: '90%',
     marginBottom: hp(20),
-    padding: wp(10),
+    padding: wp(8),
     backgroundColor: COLORS.red,
     justifyContent: 'center',
     alignItems: 'center',
@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
     opacity: 0,
   },
   text: {
-    fontSize: sp(16),
+    fontSize: sp(14),
     fontFamily: FONTS.Regular,
     textAlign: 'center',
   },

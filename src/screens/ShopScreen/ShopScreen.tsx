@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Image, ImageBackground, View } from 'react-native';
 
 import ShopAlert from './ShopAlert/ShopAlert';
@@ -33,6 +33,15 @@ const ShopScreen = () => {
   );
   const [shouldShowAlert, setShouldShowAlert] = useState(false);
 
+  useEffect(() => {
+    if (
+      contextShopBackgrounds.length > 0 &&
+      currentBackgroundIndex < contextShopBackgrounds.length
+    ) {
+      setCurrentBackground(contextShopBackgrounds[currentBackgroundIndex]);
+    }
+  }, [contextShopBackgrounds, currentBackgroundIndex]);
+
   const handleBack = () => {
     navigation.goBack();
   };
@@ -47,24 +56,27 @@ const ShopScreen = () => {
       return;
     }
 
-    const newBackgrounds = [
-      ...contextShopBackgrounds,
-      { ...currentBackground, isLocked: false },
-    ];
+    const newBackgrounds = contextShopBackgrounds.map((bg) =>
+      bg.id === currentBackground.id ? { ...bg, isLocked: false } : bg,
+    );
 
     await setContextShopBackgrounds(newBackgrounds);
-
     await decrementContextScore(currentBackground.price);
+
+    const updatedBackground = newBackgrounds.find(
+      (bg) => bg.id === currentBackground.id,
+    );
+    if (updatedBackground) {
+      setCurrentBackground(updatedBackground);
+    }
   };
 
   const handleSwitchScene = () => {
-    if (currentBackgroundIndex === contextShopBackgrounds.length - 1) {
-      setCurrentBackgroundIndex(0);
-      setCurrentBackground(contextShopBackgrounds[0]);
-    } else {
-      setCurrentBackgroundIndex(currentBackgroundIndex + 1);
-      setCurrentBackground(contextShopBackgrounds[currentBackgroundIndex + 1]);
-    }
+    setCurrentBackgroundIndex((prevIndex) => {
+      const nextIndex =
+        prevIndex === contextShopBackgrounds.length - 1 ? 0 : prevIndex + 1;
+      return nextIndex;
+    });
   };
 
   const handleChangeBackground = () => {
