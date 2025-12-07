@@ -22,12 +22,19 @@ import type {
   MainStackParamListNavigationProps,
 } from 'src/types';
 import { createLevelItems, getRandomRune, checkIfItemMatches } from 'src/utils';
+import { playSuccessSound, playBgSound, stopBgSound } from 'src/utils/sound';
 
 const GameScreen = () => {
   const route = useRoute<RouteProp<MainStackParamList, 'GameScreen'>>();
   const navigation = useNavigation<MainStackParamListNavigationProps>();
   const { level } = route.params;
-  const { completeLevel, setContextScore, contextLevels } = useGameBackground();
+  const {
+    completeLevel,
+    setContextScore,
+    contextLevels,
+    contextSoundEnabled,
+    contextMusicEnabled,
+  } = useGameBackground();
 
   const [showPauseModal, setShowPauseModal] = useState(false);
   const [showCompleteModal, setShowCompleteModal] = useState(false);
@@ -36,6 +43,16 @@ const GameScreen = () => {
   const [gameItems, setGameItems] = useState(() => createLevelItems(level));
   const [lives, setLives] = useState(3);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    if (contextMusicEnabled) {
+      playBgSound(true);
+    }
+
+    return () => {
+      stopBgSound();
+    };
+  }, [contextMusicEnabled]);
 
   useEffect(() => {
     if (!showPauseModal && !showCompleteModal && !showFailedModal) {
@@ -67,6 +84,10 @@ const GameScreen = () => {
     const isMatch = checkIfItemMatches(runeToFind, gameItems);
 
     if (isMatch) {
+      if (contextSoundEnabled) {
+        playSuccessSound(true);
+      }
+
       const newItems = gameItems.slice(1);
       setGameItems(newItems);
 
@@ -88,6 +109,10 @@ const GameScreen = () => {
       clearInterval(intervalRef.current);
     }
 
+    if (contextMusicEnabled) {
+      stopBgSound();
+    }
+
     await completeLevel(level.id);
 
     await setContextScore(10);
@@ -100,15 +125,25 @@ const GameScreen = () => {
       clearInterval(intervalRef.current);
     }
 
+    if (contextMusicEnabled) {
+      stopBgSound();
+    }
+
     setShowFailedModal(true);
   };
 
   const handlePause = () => {
     setShowPauseModal(true);
+    if (contextMusicEnabled) {
+      stopBgSound();
+    }
   };
 
   const handleResume = () => {
     setShowPauseModal(false);
+    if (contextMusicEnabled) {
+      playBgSound(true);
+    }
   };
 
   const handleRestart = () => {

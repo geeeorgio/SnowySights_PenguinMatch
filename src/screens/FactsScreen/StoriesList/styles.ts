@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     flex: 0.8,
     flexGrow: 1,
     paddingLeft: wp(12),
-    fontSize: sp(16),
+    fontSize: sp(14),
     fontFamily: FONTS.SemiBold,
     color: COLORS.blue,
   },

@@ -20,6 +20,7 @@ import {
   setShopBackgroundsToStore,
   setSoundEnabledToStore,
 } from 'src/utils';
+import { cleanupSounds, initSounds, playSuccessSound } from 'src/utils/sound';
 
 const BgContext = createContext<{
   //
@@ -96,6 +97,14 @@ const BackgroundProvider = ({ children }: { children: ReactNode }) => {
   const [savedShopBackgrounds, setSavedShopBackgrounds] =
     useState<ShopBackground[]>(SHOP_BACKGROUNDS);
   const [savedLevels, setSavedLevels] = useState<GameLevel[]>(GAME_LEVELS);
+
+  useEffect(() => {
+    initSounds();
+
+    return () => {
+      cleanupSounds();
+    };
+  }, []);
 
   useEffect(() => {
     const initializeData = async () => {
@@ -242,6 +251,10 @@ const BackgroundProvider = ({ children }: { children: ReactNode }) => {
 
       setSavedLevels(updatedLevels);
       await setLevelsToStore(updatedLevels);
+
+      if (savedSoundEnabled) {
+        playSuccessSound(true);
+      }
     } catch (e) {
       console.error('Error completing level:', e);
     }
