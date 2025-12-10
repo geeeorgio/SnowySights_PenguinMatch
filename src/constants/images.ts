@@ -1,9 +1,9 @@
-export const MAIN_BACKGROUND = require('../assets/images/bckgd/ice_bckg4.png');
+export const MAIN_BACKGROUND = require('../assets/images/bckgd/rush_bg1.png');
 
 export const OPTIONAL_BACKGROUNDS = {
-  bg1: require('../assets/images/bckgd/ice_bckd1.png'),
-  bg2: require('../assets/images/bckgd/ice_bckg2.png'),
-  bg3: require('../assets/images/bckgd/ice_bckg3.png'),
+  bg1: require('../assets/images/bckgd/rush_bg2.png'),
+  bg2: require('../assets/images/bckgd/rush_bg3.png'),
+  bg3: require('../assets/images/bckgd/rush_bg0.png'),
 };
 
 export const ONBD_BCKD = {
@@ -49,4 +49,5 @@ export const GAME_ITEMS = {
   fish3: require('../assets/images/items/fish3.png'),
   fish4: require('../assets/images/items/fish4.png'),
   fish5: require('../assets/images/items/fish5.png'),
+  rush_fish: require('../assets/images/items/rush_fish.png'),
 };

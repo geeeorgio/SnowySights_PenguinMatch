@@ -231,11 +231,11 @@ const GameScreen = () => {
       </TouchableOpacity>
 
       <View style={styles.penguinContainer}>
-        <Image
+        {/* <Image
           source={GAME_ITEMS.ice_fish}
           style={styles.penguinImage}
           resizeMode="contain"
-        />
+        /> */}
       </View>
 
       <PauseModal

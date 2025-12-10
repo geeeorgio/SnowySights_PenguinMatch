@@ -79,7 +79,7 @@ android {
 
     namespace "com.snowysightspenguinmatch"
     defaultConfig {
-        applicationId "com.attentiontraine"
+        applicationId "com.icefocusrushfish"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

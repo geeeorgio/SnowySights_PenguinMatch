@@ -44,7 +44,7 @@ const OnboardingScreen3 = () => {
 
       <View style={styles.footerWrapper}>
         <Image
-          source={GAME_ITEMS.ice_fish}
+          source={GAME_ITEMS.rush_fish}
           style={styles.footerImage}
           resizeMode="contain"
         />
