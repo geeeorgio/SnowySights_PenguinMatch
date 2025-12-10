@@ -30,7 +30,7 @@ const LevelFailedModal = ({
         resizeMode="contain"
       >
         <CustomText extraStyle={styles.text}>
-          No worry – even the bravest penguin stumbles on the frost. Try again?
+          No worry – even the bravest fish stumbles on the frost. Try again?
         </CustomText>
 
         <View style={styles.buttonsContainer}>

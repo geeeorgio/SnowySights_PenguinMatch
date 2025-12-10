@@ -6,7 +6,7 @@ import { styles } from './styles';
 
 import { CustomButton, CustomScreenWrapper, CustomText } from 'src/components';
 import { useGameBackground } from 'src/components/layout/BackgroundProvider';
-import { ONBD_BCKD } from 'src/constants';
+import { ONBD_BCKD, OPTIONAL_BACKGROUNDS } from 'src/constants';
 import type { OnboardingStackParamListNavigationProps } from 'src/types';
 
 const OnboardingScreen2 = () => {
@@ -22,12 +22,14 @@ const OnboardingScreen2 = () => {
   };
 
   return (
-    <ImageBackground source={ONBD_BCKD.onbd3} style={styles.imageBackground}>
+    <ImageBackground
+      source={OPTIONAL_BACKGROUNDS.bg3}
+      style={styles.imageBackground}
+    >
       <CustomScreenWrapper extraStyle={styles.container}>
         <CustomText extraStyle={styles.text}>
-          Confused penguins gathered around the snowy field, trying to
-          understand what happened. Everything familiar felt scattered,
-          shuffled, and misplaced
+          The fishing spot was covered in a thick layer of snow. The fish were
+          hiding so deep that they were almost impossible to find.
         </CustomText>
 
         <View style={styles.indicatorContainer}>

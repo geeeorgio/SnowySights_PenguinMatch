@@ -232,7 +232,7 @@ const GameScreen = () => {
 
       <View style={styles.penguinContainer}>
         <Image
-          source={GAME_ITEMS.penguin}
+          source={GAME_ITEMS.ice_fish}
           style={styles.penguinImage}
           resizeMode="contain"
         />

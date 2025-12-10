@@ -61,3 +61,61 @@ export const STORIES: Story[] = [
     description: `Not all penguins live surrounded by snow. On the sunlit cliffs of the Galápagos Islands, warm breezes sweep through volcanic cracks where the rare Galápagos penguins make their homes. They are the only penguins that live north of the equator, surviving in a world where palm trees grow not far from the shore. \n Their greatest challenge is not cold, but heat. These penguins must protect themselves from the blazing equatorial sun. To stay cool, they stretch their flippers out like wings, allowing the breeze to touch their skin. They shade their feet beneath their bodies and pant softly to release excess heat. Sometimes they even stand in small pools of cool water, letting the waves wash over their toes. \n Watching them, it becomes clear that penguins are more adaptable than we ever imagine. Whether under drifting snowflakes or tropical sunlight, they find ways to thrive — always carrying a piece of the southern spirit within them.`,
   },
 ];
+
+export const STORIES_FISHING: Story[] = [
+  {
+    id: 'first-ice',
+    title: 'The Whispers of First Ice',
+    description: `The year's first safe ice is a promise whispered across the quiet town. It's thin, black, and slick, but solid enough to bear the weight of a lone angler. This journey isn't about the catch yet; it’s about claiming the space. The air hangs heavy and cold, and every step sounds like a crack against the silence. \n The first hole is drilled not in haste, but with ritualistic care. Through the fresh cut, the water below looks impossibly dark, a hidden world waiting. It is here, far from the shore, that the fishermen feel the lake is truly theirs again. The anxiety of the thin ice is tempered by the profound stillness, the certainty that they are the first to peer into winter’s deep secrets. This fragile, early pilgrimage is a necessary act of trust—a bond renewed with the water and the cold.`,
+  },
+  {
+    id: 'silent-vigil',
+    title: 'A Silent Vigil in the Shack',
+    description: `The ice fishing shacks are scattered across the lake like small, lonely houses. Inside, the world shrinks to the size of a kerosene heater and the small, dark hole in the floor. Hours pass in absolute silence, broken only by the drip of melting ice or the turning of a page. This waiting is not boredom; it is a profound practice of stillness. \n The angler watches the delicate line, suspended in the abyss, seeking the faintest shudder that signals life. Outside, the wind howls, making the shack tremble, but inside, there is only focus. The vigil lasts until the light fades, proving that the greatest reward of the ice is not a fish, but the rare luxury of uninterrupted solitude and patience tested by the infinite cold.`,
+  },
+  {
+    id: 'ghost-bite',
+    title: 'The Ghost Bite of the Depths',
+    description: `The best catches often come during the dead of night, when the lake is at its most mysterious. The only light is from the stars, magnified by the snow, and a faint lamp over the hole. Suddenly, the line gives a tiny, almost imperceptible twitch—the 'ghost bite.' \n It’s a moment of absolute tension, where instinct must overcome hesitation. The fish below is powerful and deep, testing the resolve of the angler in the darkness. To hesitate is to lose the connection. The resulting battle is a silent tug-of-war beneath the ice, a primal struggle between the warmth above and the immense, unseen cold below. Success is not just landing the fish, but proving one’s sensitivity to the smallest signal from the hidden world.`,
+  },
+  {
+    id: 'frozen-journey',
+    title: 'The Journey Across the Snow Plain',
+    description: `Some days, the fish refuse to bite near the shacks. This means an hour-long trek across the vast, featureless snowfield is required. Pulling the gear sled feels like towing a small mountain, and the horizon never seems to get closer. The cold bites at exposed skin, demanding complete attention. \n Yet, the journey is restorative. The world is reduced to the crunch of boots on snow and the rhythm of breathing. There is a deep satisfaction in covering the distance, knowing the best spot requires this effort. When the new hole is finally drilled and the line dropped, the exhaustion is replaced by a renewed, fierce hope. The fish caught after such a journey tastes like triumph.`,
+  },
+  {
+    id: 'the-drift',
+    title: 'A Shimmering Drift on the Horizon',
+    description: `A peaceful winter day is suddenly transformed by an incoming snow drift. It begins as a faint, shimmering haze on the far shore, moving fast and low. Experienced anglers know this is not an ordinary storm, but a 'Fish-Drift'—a phenomenon where the shifting weather causes a temporary, intense feeding frenzy beneath the ice. \n The silence is replaced by urgent, focused activity. Lines are hastily checked, bait is changed, and the atmosphere hums with expectation. The window of opportunity is short, lasting only until the drift fully envelops the lake. It is a wild, joyful scramble against the elements, proving that luck is often simply preparedness meeting a sudden, chaotic gift from the weather.`,
+  },
+  {
+    id: 'windfall-hut',
+    title: 'The Hum of the Windfall Hut',
+    description: `Not all days end in triumph. Sometimes, the shacks are visited by others seeking shelter from a sudden squall. These small, shared spaces become temporary havens where stories are exchanged—tales of lost lures, impossible catches, and the coldest mornings. The smell of coffee and burnt wood hangs in the air. \n For a brief time, the goal is not fishing, but companionship. The collective hum of shared voices chases away the biting cold, transforming the lonely pursuit into a communal event. It’s a reminder that even in the vast isolation of the frozen lake, people depend on each other for warmth and hope. The best catches of the day might just be the stories shared.`,
+  },
+  {
+    id: 'frozen-trophy',
+    title: 'The Weight of the Frozen Trophy',
+    description: `The moment the rod bends violently, the silence is broken. This is the one—the fish that fights with the full, sluggish power of the cold water. Bringing it up through the small, dark hole is a struggle against physics and fear of losing it right at the end. \n When the fish finally slides onto the ice, it is an impressive sight: scales shining, colors intensified by the moisture and the sharp light. It lies still, a temporary monument to the patience and skill of the angler. The fish is not just food; it is a measure of the winter, a tangible piece of the dark, mysterious world brought briefly into the light before the long walk back.`,
+  },
+  {
+    id: 'the-crackle',
+    title: 'The Crackle Beneath the Boots',
+    description: `There is a sound unique to the heart of winter: the deep, resonating 'crack' beneath the thickest ice. It's a sound that makes the heart leap, a reminder of the immense, cold power held just inches below the surface. This sound is not danger, but the expansion and contraction of the massive frozen plate. \n The sound travels far and wide across the barren lake, a pulse of the ice itself. Anglers listen to it with a mixture of awe and respect. It anchors them to the moment, reminding them of the fragility of their perch and the strength of the element they rely upon. The crackle is the voice of the deep, a constant background to the silent hunt.`,
+  },
+  {
+    id: 'midday-sleep',
+    title: 'The Midday Sleep of the Sun',
+    description: `In the far north, the winter sun barely climbs above the horizon. Midday feels like a perpetual twilight, casting long, pale shadows that exaggerate every bump and drift on the snow. This strange, muted light creates a sense of endless waiting, a time when the fish are often at their most sluggish. \n The angler uses this time for slow, deliberate movements. The bait is jigged with the faintest tremor, trying to coax a bite from the half-sleeping depths. It is a test of confidence—to believe a bite will come, even when the sun seems to have forgotten the world above. Patience becomes an active pursuit during the sun’s long, quiet rest.`,
+  },
+  {
+    id: 'the-line-drop',
+    title: 'The Perfect Line Drop',
+    description: `Success in ice fishing often comes down to depth. The perfect 'line drop' is a practiced art, sending the lure down to a specific, invisible contour known only by memory and intuition. It requires the angler to mentally map the hidden ledges and valleys of the lake bottom. \n The line is fed out slowly, counting the revolutions of the reel, feeling for the soft, distinct *thud* that signals contact with the exact spot where the fish gather. This precision is a form of deep respect for the lake. It is a silent communication with the topography below, proving that the angler knows the hidden world as well as the world above the ice.`,
+  },
+  {
+    id: 'ice-mirror',
+    title: 'The Ice as a Scrying Mirror',
+    description: `On rare, windless days, the water in the fishing hole becomes perfectly still. By lying flat on the ice, covering the hole with a dark cloth, the angler can peer down into the water. The hole becomes a window, transforming the ice into a 'scrying mirror' that reveals the secrets below. \n What is seen is not just fish, but the slow, elegant choreography of the underwater world: weeds swaying, pebbles gleaming, and the fish themselves moving with deliberate, cold grace. This visual connection is a profound reward. It is a moment of pure observation, an understanding that the fish are not just targets, but residents of a silent, beautiful kingdom.`,
+  },
+];

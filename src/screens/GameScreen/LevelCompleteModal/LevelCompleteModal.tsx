@@ -32,8 +32,8 @@ const LevelCompleteModal = ({
         resizeMode="contain"
       >
         <CustomText extraStyle={styles.text}>
-          With your sharp sight, the bay grows calmer. The penguins cheer
-          quietly
+          With your sharp sight, the fishing spot is getting clearer. The fish
+          are getting closer.
         </CustomText>
 
         <View style={styles.rewardContainer}>

@@ -18,8 +18,8 @@ const OnboardingScreen3 = () => {
     <CustomScreenWrapper extraStyle={[styles.container]}>
       <View style={styles.contentWrapper}>
         <CustomText extraStyle={styles.text}>
-          Now you must step in. Help the penguins bring clarity back to their
-          frosty home by matching what belongs together
+          Now you must step in. Help the fish find their way back to the fishing
+          spot.
         </CustomText>
 
         <View style={styles.indicatorContainer}>
@@ -44,7 +44,7 @@ const OnboardingScreen3 = () => {
 
       <View style={styles.footerWrapper}>
         <Image
-          source={GAME_ITEMS.penguin}
+          source={GAME_ITEMS.ice_fish}
           style={styles.footerImage}
           resizeMode="contain"
         />

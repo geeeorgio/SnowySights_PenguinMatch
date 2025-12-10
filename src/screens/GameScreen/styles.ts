@@ -47,13 +47,13 @@ export const styles = StyleSheet.create({
   gameContainerContent: {
     width: '100%',
     paddingVertical: wp(26),
-    gap: wp(4),
+    gap: wp(2),
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
   gameItemContainer: {
-    width: wp(33),
+    width: wp(35),
     aspectRatio: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -77,8 +77,8 @@ export const styles = StyleSheet.create({
   },
   optionImage: {
     marginTop: hp(10),
-    width: '50%',
-    height: '50%',
+    width: '60%',
+    height: '60%',
   },
   penguinContainer: {
     paddingBottom: hp(20),

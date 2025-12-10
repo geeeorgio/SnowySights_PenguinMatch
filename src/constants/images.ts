@@ -1,9 +1,9 @@
-export const MAIN_BACKGROUND = require('../assets/images/bckgd/mainBg.png');
+export const MAIN_BACKGROUND = require('../assets/images/bckgd/ice_bckg4.png');
 
 export const OPTIONAL_BACKGROUNDS = {
-  bg1: require('../assets/images/bckgd/bg2.png'),
-  bg2: require('../assets/images/bckgd/bg3.png'),
-  bg3: require('../assets/images/bckgd/bg4.png'),
+  bg1: require('../assets/images/bckgd/ice_bckd1.png'),
+  bg2: require('../assets/images/bckgd/ice_bckg2.png'),
+  bg3: require('../assets/images/bckgd/ice_bckg3.png'),
 };
 
 export const ONBD_BCKD = {
@@ -43,4 +43,10 @@ export const GAME_ITEMS = {
   penguin: require('../assets/images/items/penguinSearch.png'),
   plums: require('../assets/images/items/plums.png'),
   rock: require('../assets/images/items/rock.png'),
+  ice_fish: require('../assets/images/items/ice_fish.png'),
+  fish1: require('../assets/images/items/fish1.png'),
+  fish2: require('../assets/images/items/fish2.png'),
+  fish3: require('../assets/images/items/fish3.png'),
+  fish4: require('../assets/images/items/fish4.png'),
+  fish5: require('../assets/images/items/fish5.png'),
 };

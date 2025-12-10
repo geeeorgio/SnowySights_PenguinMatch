@@ -5,7 +5,7 @@ import { styles } from './styles';
 
 import { CustomButton, CustomContainer, CustomText } from 'src/components';
 import type { Story } from 'src/constants';
-import { STORIES } from 'src/constants';
+import { STORIES, STORIES_FISHING } from 'src/constants';
 
 interface StoriesListProps {
   handleSelectStory: (story: Story) => void;
@@ -14,7 +14,7 @@ interface StoriesListProps {
 const StoriesList = ({ handleSelectStory }: StoriesListProps) => {
   return (
     <FlatList
-      data={STORIES}
+      data={STORIES_FISHING}
       keyExtractor={(item) => item.id.toString()}
       ListFooterComponent={<View style={styles.footer} />}
       contentContainerStyle={styles.listContainer}

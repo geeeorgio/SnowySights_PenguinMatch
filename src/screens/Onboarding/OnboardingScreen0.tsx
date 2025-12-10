@@ -6,7 +6,7 @@ import { styles } from './styles';
 
 import { CustomButton, CustomScreenWrapper, CustomText } from 'src/components';
 import { useGameBackground } from 'src/components/layout/BackgroundProvider';
-import { ONBD_BCKD } from 'src/constants';
+import { ONBD_BCKD, OPTIONAL_BACKGROUNDS } from 'src/constants';
 import type { OnboardingStackParamListNavigationProps } from 'src/types';
 
 const OnboardingScreen0 = () => {
@@ -22,11 +22,14 @@ const OnboardingScreen0 = () => {
   };
 
   return (
-    <ImageBackground source={ONBD_BCKD.onbd1} style={styles.imageBackground}>
+    <ImageBackground
+      source={OPTIONAL_BACKGROUNDS.bg1}
+      style={styles.imageBackground}
+    >
       <CustomScreenWrapper extraStyle={styles.container}>
         <CustomText extraStyle={styles.text}>
-          A peaceful winter day in the Penguin Bay suddenly changed when an
-          unusual shimmering snowstorm rose from the cold horizon. It wasn’t
+          Peace settled over the icy fishing spot. As the sun dipped, an
+          unexpected glow of frost and light lifted from the horizon. It wasn’t
           dangerous — just strangely alive, swirling with playful sparkles.
         </CustomText>
 

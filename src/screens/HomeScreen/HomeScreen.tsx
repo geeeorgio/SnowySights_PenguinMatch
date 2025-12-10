@@ -14,7 +14,7 @@ const HomeScreen = () => {
       <HomeHeader />
 
       <View style={styles.logoWrapper}>
-        <Image source={LOGO} style={styles.logo} resizeMode="contain" />
+        {/* <Image source={LOGO} style={styles.logo} resizeMode="contain" /> */}
       </View>
 
       <HomeMenu />

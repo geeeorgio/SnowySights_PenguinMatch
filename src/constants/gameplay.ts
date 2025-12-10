@@ -31,9 +31,9 @@ export const GAME_LEVELS = [
 ];
 
 export const GAME_RUNES: GameRune[] = [
-  { id: 'rune1', name: 'diamond', source: GAME_ITEMS.diamond },
-  { id: 'rune2', name: 'lighter', source: GAME_ITEMS.lighter },
-  { id: 'rune3', name: 'necklace', source: GAME_ITEMS.necklace },
-  { id: 'rune4', name: 'plums', source: GAME_ITEMS.plums },
-  { id: 'rune5', name: 'rock', source: GAME_ITEMS.rock },
+  { id: 'rune1', name: 'diamond', source: GAME_ITEMS.fish1 },
+  { id: 'rune2', name: 'lighter', source: GAME_ITEMS.fish2 },
+  { id: 'rune3', name: 'necklace', source: GAME_ITEMS.fish3 },
+  { id: 'rune4', name: 'plums', source: GAME_ITEMS.fish4 },
+  { id: 'rune5', name: 'rock', source: GAME_ITEMS.fish5 },
 ];

@@ -6,7 +6,7 @@ import { styles } from './styles';
 
 import { CustomButton, CustomScreenWrapper, CustomText } from 'src/components';
 import { useGameBackground } from 'src/components/layout/BackgroundProvider';
-import { ONBD_BCKD } from 'src/constants';
+import { ONBD_BCKD, OPTIONAL_BACKGROUNDS } from 'src/constants';
 import type { OnboardingStackParamListNavigationProps } from 'src/types';
 
 const OnboardingScreen1 = () => {
@@ -22,12 +22,15 @@ const OnboardingScreen1 = () => {
   };
 
   return (
-    <ImageBackground source={ONBD_BCKD.onbd2} style={styles.imageBackground}>
+    <ImageBackground
+      source={OPTIONAL_BACKGROUNDS.bg2}
+      style={styles.imageBackground}
+    >
       <CustomScreenWrapper extraStyle={styles.container}>
         <CustomText extraStyle={styles.text}>
-          As it spun across the colony, the storm swept through every corner,
-          mixing things that were never meant to be mixed. When the wind calmed,
-          nothing in the bay looked quite the same
+          A light snow began to fall, dusting the ground with a fine, frosty
+          blanket. The silence was almost eerie, but it was peaceful, a calm
+          before the storm.
         </CustomText>
 
         <View style={styles.indicatorContainer}>
